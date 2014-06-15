@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RMCoreDataStack"
-  s.version          = "0.1.0"
+  s.version          = File.read('VERSION')
   s.summary          = "Hit the ground running with a sane Core Data stack."
   s.description      = <<-DESC
                        Hit the ground running with a sane Core Data stack.
@@ -18,6 +18,5 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '7.0'
   s.requires_arc = true
   s.source_files = 'Classes', 'Classes/**/*.{h,m}'
-  s.resources = 'Assets/*.png'
   s.frameworks = 'CoreData'
 end
