@@ -10,7 +10,6 @@
 
 @interface RMCoreDataConfiguration : NSObject
 
-@property (nonatomic, strong) NSString *modelName;
 @property (nonatomic, strong) NSURL *modelURL;
 @property (nonatomic) BOOL iCloudEnabled;
 @property (nonatomic, strong) id mergePolicy;

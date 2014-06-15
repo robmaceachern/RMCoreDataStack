@@ -21,7 +21,7 @@
 - (NSURL *)persistentStoreURL {
     if (!_persistentStoreURL) {
         NSURL *storeURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-        storeURL = [storeURL URLByAppendingPathComponent:[NSString stringWithFormat:@"%@.pstore", self.modelName]];
+        storeURL = [storeURL URLByAppendingPathComponent:@"PersistentStore.pstore"];
         _persistentStoreURL = storeURL;
     }
     return _persistentStoreURL;

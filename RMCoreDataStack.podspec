@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                        * Sensible defaults and easy configuration
                        * iCloud sync made easy when you want it
                        DESC
-  s.homepage         = "http://www.robmaceachern.com"
+  s.homepage         = "http://robmaceachern.github.io/RMCoreDataStack"
   s.license          = 'MIT'
   s.author           = { "Rob MacEachern" => "rob@robmaceachern.com" }
   s.source           = { :git => "https://github.com/robmaceachern/RMCoreDataStack.git", :tag => s.version.to_s }

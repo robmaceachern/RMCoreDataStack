@@ -6,9 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RMCoreDataConfiguration.h"
 
 @protocol RMCoreDataStackDelegate;
-@class RMCoreDataConfiguration;
 
 @interface RMCoreDataStack : NSObject
 
