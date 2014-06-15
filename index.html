@@ -41,10 +41,50 @@
 <h2>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
 
+<h3>
+<a name="in-your-own-project" class="anchor" href="#in-your-own-project"><span class="octicon octicon-link"></span></a>In your own project</h3>
+
+<ol>
+<li>
+<p>Install via <a href="http://cocoapods.org/">CocoaPods</a></p>
+
+<pre><code>pod 'RMCoreDataStack'
+</code></pre>
+</li>
+<li>
+<p>Import the public header</p>
+
+<pre><code>#import &lt;RMCoreDataStack/RMCoreDataStack.h&gt;
+</code></pre>
+</li>
+<li>
+<p>Setup your stack</p>
+
+<pre><code>self.coreDataStack = [[RMCoreDataStack alloc] init];
+self.coreDataStack.delegate = self;
+[self.coreDataStack constructWithConfiguration:nil];
+</code></pre>
+</li>
+<li>
+<p>Grab the NSManagedObject context and start persisting!</p>
+
+<pre><code>NSManagedObjectContext context = self.coreDataStack.managedObjectContext;
+// pass context to your custom objects and view controllers
+</code></pre>
+</li>
+</ol><p>If you need to customize the configuration of the core data stack you can do so by creating an <code>RMCoreDataConfiguration</code> and passing it to the <code>constructWithConfiguration:</code> method.</p>
+
+<h3>
+<a name="demo-project" class="anchor" href="#demo-project"><span class="octicon octicon-link"></span></a>Demo project</h3>
+
 <p>To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first.</p>
+
+<p>The BasicDemo is based on the XCode Master-Detail Application template. The only changes are in RMAppDelegate.</p>
 
 <h2>
 <a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>The project is currently configured to support iOS 7 and higher. OSX is not currently supported but it will be soon.</p>
 
 <h2>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
