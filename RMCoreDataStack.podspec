@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name             = "RMCoreDataStack"
   s.version          = "0.1.0"
-  s.summary          = "Hit the ground running with a simple Core Data stack."
+  s.summary          = "Hit the ground running with a sane Core Data stack."
   s.description      = <<-DESC
-                       Hit the ground running with a simple Core Data stack.
+                       Hit the ground running with a sane Core Data stack.
 
                        * Sensible defaults and easy configuration
-                       * iCloud sync made easy
+                       * iCloud sync made easy when you want it
                        DESC
   s.homepage         = "http://www.robmaceachern.com"
   s.license          = 'MIT'
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.ios.deployment_target = '7.0'
   s.requires_arc = true
-  s.source_files = 'Classes'
+  s.source_files = 'Classes', 'Classes/**/*.{h,m}'
   s.resources = 'Assets/*.png'
   s.frameworks = 'CoreData'
 end
