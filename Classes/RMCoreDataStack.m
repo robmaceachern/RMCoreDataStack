@@ -85,10 +85,18 @@
                            selector:@selector(mainManagedObjectContextDidSave:)
                                name:NSManagedObjectContextDidSaveNotification
                              object:managedObjectContext];
+    
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
     [notificationCenter addObserver:self
                            selector:@selector(appWillResignActive:)
                                name:UIApplicationWillResignActiveNotification
                              object:nil];
+#else
+    [notificationCenter addObserver:self
+                           selector:@selector(appWillResignActive:)
+                               name:NSApplicationWillResignActiveNotification
+                             object:nil];
+#endif
     
     if (configuration.iCloudEnabled) {
         [notificationCenter addObserver:self

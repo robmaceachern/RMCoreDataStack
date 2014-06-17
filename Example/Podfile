@@ -1,7 +1,16 @@
 # Uncomment this line to define a global platform for your project
 # platform :ios, '7.0'
 
-target "BasicDemo" do
+workspace 'Examples.xcworkspace'
+
+link_with 'iOSDemo'
+xcodeproj 'iOSDemo/iOSDemo.xcodeproj'
+pod "RMCoreDataStack", :path => "../"
+
+target 'OSXDemo' do
+  platform :osx, '10.9'
+  link_with 'OSXDemo'
+  xcodeproj 'OSXDemo/OSXDemo.xcodeproj'
   pod "RMCoreDataStack", :path => "../"
 end
 

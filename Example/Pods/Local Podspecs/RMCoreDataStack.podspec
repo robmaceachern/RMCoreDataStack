@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/robmaceachern/RMCoreDataStack.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/robmaceachern'
 
-  s.platform     = :ios, '7.0'
   s.ios.deployment_target = '7.0'
+  s.osx.deployment_target = '10.9'
   s.requires_arc = true
   s.source_files = 'Classes', 'Classes/**/*.{h,m}'
   s.frameworks = 'CoreData'

@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  RMCoreDataStack: 74d3fedd1d4b035ea081bd6ce17771852af2abb4
+  RMCoreDataStack: 8be8fad06f9f4ae9cc31e3ae0524fa49cf856e31
 
 COCOAPODS: 0.33.1
