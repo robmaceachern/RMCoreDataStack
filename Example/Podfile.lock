@@ -1,5 +1,5 @@
 PODS:
-  - RMCoreDataStack (0.1.0)
+  - RMCoreDataStack (9000.0.0)
 
 DEPENDENCIES:
   - RMCoreDataStack (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  RMCoreDataStack: c23407b6cbc1f3dfb3148265bfec39c42dee7d6f
+  RMCoreDataStack: 74d3fedd1d4b035ea081bd6ce17771852af2abb4
 
 COCOAPODS: 0.33.1

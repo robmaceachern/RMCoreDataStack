@@ -8,7 +8,7 @@
 
 // RMCoreDataStack
 #define COCOAPODS_POD_AVAILABLE_RMCoreDataStack
-#define COCOAPODS_VERSION_MAJOR_RMCoreDataStack 0
-#define COCOAPODS_VERSION_MINOR_RMCoreDataStack 1
+#define COCOAPODS_VERSION_MAJOR_RMCoreDataStack 9000
+#define COCOAPODS_VERSION_MINOR_RMCoreDataStack 0
 #define COCOAPODS_VERSION_PATCH_RMCoreDataStack 0
 

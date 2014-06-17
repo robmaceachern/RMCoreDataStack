@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RMCoreDataStack"
-  s.version          = File.read('VERSION')
+  s.version          = begin; File.read('VERSION'); rescue; '9000.0.0'; end
   s.summary          = "Hit the ground running with a sane Core Data stack."
   s.description      = <<-DESC
                        Hit the ground running with a sane Core Data stack.
