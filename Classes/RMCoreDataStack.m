@@ -63,7 +63,7 @@
                                                            options:configuration.persistentStoreOptions
                                                              error:&error];
         NSLog(@"%s NSPersistentStore added", __PRETTY_FUNCTION__);
-        if (!store) {
+        if (!store || error) {
             ALog(@"Error adding persistent store to coordinator %@\n%@", [error localizedDescription], [error userInfo]);
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.delegate coreDataStack:self failedInitializingWithInfo:@{}]; // TODO
@@ -98,23 +98,20 @@
                              object:nil];
 #endif
     
-    if (configuration.iCloudEnabled) {
-        [notificationCenter addObserver:self
-                               selector:@selector(persistentStoreCoordinatorStoresWillChange:)
-                                   name:NSPersistentStoreCoordinatorStoresWillChangeNotification
-                                 object:persistentStoreCoordinator];
-        
-        [notificationCenter addObserver:self
-                               selector:@selector(persistentStoreCoordinatorStoresDidChange:)
-                                   name:NSPersistentStoreCoordinatorStoresDidChangeNotification
-                                 object:persistentStoreCoordinator];
-        
-        [notificationCenter addObserver:self
-                               selector:@selector(persistentStoreDidImportUbiquitousContentChanges:)
-                                   name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
-                                 object:persistentStoreCoordinator];
-    }
+    [notificationCenter addObserver:self
+                           selector:@selector(persistentStoreCoordinatorStoresWillChange:)
+                               name:NSPersistentStoreCoordinatorStoresWillChangeNotification
+                             object:persistentStoreCoordinator];
     
+    [notificationCenter addObserver:self
+                           selector:@selector(persistentStoreCoordinatorStoresDidChange:)
+                               name:NSPersistentStoreCoordinatorStoresDidChangeNotification
+                             object:persistentStoreCoordinator];
+    
+    [notificationCenter addObserver:self
+                           selector:@selector(persistentStoreDidImportUbiquitousContentChanges:)
+                               name:NSPersistentStoreDidImportUbiquitousContentChangesNotification
+                             object:persistentStoreCoordinator];
 }
 
 - (void)saveManagedObjectContext:(NSManagedObjectContext *)context wait:(BOOL)wait {
@@ -137,34 +134,43 @@
 
 #pragma mark - NSNotificationCenter handlers
 
-- (void)mainManagedObjectContextDidSave:(NSDictionary *)info {
-    NSLog(@"%s Saving privateContext", __PRETTY_FUNCTION__);
+- (void)mainManagedObjectContextDidSave:(NSNotification *)info {
     [self saveManagedObjectContext:self.privateContext wait:NO];
 }
 
-- (void)appWillResignActive:(NSDictionary *)info {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+- (void)appWillResignActive:(NSNotification *)info {
     // TODO add support for saving in a background task
     [self saveManagedObjectContext:self.managedObjectContext wait:YES];
     [self saveManagedObjectContext:self.privateContext wait:YES];
 }
 
-- (void)persistentStoreCoordinatorStoresWillChange:(NSDictionary *)info {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+- (void)persistentStoreCoordinatorStoresWillChange:(NSNotification *)info {
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, info);
     [self saveManagedObjectContext:self.managedObjectContext wait:YES];
+    if ([self.delegate respondsToSelector:@selector(coreDataStack:willResetManagedObjectContext:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate coreDataStack:self willResetManagedObjectContext:self.managedObjectContext];
+        });
+    }
     [self.managedObjectContext performBlockAndWait:^{
         [self.managedObjectContext reset];
     }];
+    if ([self.delegate respondsToSelector:@selector(coreDataStack:didResetManagedObjectContext:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate coreDataStack:self didResetManagedObjectContext:self.managedObjectContext];
+        });
+    }
 }
 
-- (void)persistentStoreCoordinatorStoresDidChange:(NSDictionary *)info {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
+- (void)persistentStoreCoordinatorStoresDidChange:(NSNotification *)info {
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, info);
 }
 
-- (void)persistentStoreDidImportUbiquitousContentChanges:(NSDictionary *)info {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
+- (void)persistentStoreDidImportUbiquitousContentChanges:(NSNotification *)info {
+    NSLog(@"%s %@", __PRETTY_FUNCTION__, info);
+    [self.managedObjectContext performBlock:^{
+        [self.managedObjectContext mergeChangesFromContextDidSaveNotification:info];
+    }];
 }
 
 @end

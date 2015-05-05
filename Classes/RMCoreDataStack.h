@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RMCoreDataConfiguration.h"
+#import <CoreData/CoreData.h>
 
 @protocol RMCoreDataStackDelegate;
 
@@ -24,5 +25,9 @@
 @required
 - (void)coreDataStack:(RMCoreDataStack *)stack didFinishInitializingWithInfo:(NSDictionary *)info;
 - (void)coreDataStack:(RMCoreDataStack *)stack failedInitializingWithInfo:(NSDictionary *)info;
+
+@optional
+- (void)coreDataStack:(RMCoreDataStack *)stack willResetManagedObjectContext:(NSManagedObjectContext *)moc;
+- (void)coreDataStack:(RMCoreDataStack *)stack didResetManagedObjectContext:(NSManagedObjectContext *)moc;
 
 @end

@@ -73,10 +73,14 @@
 - (NSMutableDictionary *)persistentStoreOptions {
     if (!_persistentStoreOptions) {
         _persistentStoreOptions = [[NSMutableDictionary alloc] init];
-        if (self.iCloudEnabled) {
-            _persistentStoreOptions[NSPersistentStoreUbiquitousContentNameKey] = @"UbiquitousContentName";
-        }
     }
+    
+    if (self.iCloudEnabled) {
+        _persistentStoreOptions[NSPersistentStoreUbiquitousContentNameKey] = @"UbiquitousContentName";
+    } else {
+        [_persistentStoreOptions removeObjectForKey:NSPersistentStoreUbiquitousContentNameKey];
+    }
+    
     return _persistentStoreOptions;
 }
 
