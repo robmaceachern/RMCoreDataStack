@@ -29,5 +29,6 @@
 @optional
 - (void)coreDataStack:(RMCoreDataStack *)stack willResetManagedObjectContext:(NSManagedObjectContext *)moc;
 - (void)coreDataStack:(RMCoreDataStack *)stack didResetManagedObjectContext:(NSManagedObjectContext *)moc;
+- (void)coreDataStack:(RMCoreDataStack *)stack persistentStoreCoordinatorStoresDidChange:(NSDictionary *)info;
 
 @end

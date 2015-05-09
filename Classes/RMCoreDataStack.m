@@ -163,7 +163,11 @@
 }
 
 - (void)persistentStoreCoordinatorStoresDidChange:(NSNotification *)info {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, info);
+    if ([self.delegate respondsToSelector:@selector(coreDataStack:persistentStoreCoordinatorStoresDidChange:)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate coreDataStack:self persistentStoreCoordinatorStoresDidChange:info.userInfo];
+        });
+    }
 }
 
 - (void)persistentStoreDidImportUbiquitousContentChanges:(NSNotification *)info {
