@@ -39,7 +39,7 @@ If you need to customize the configuration of the core data stack you can do so 
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
-The BasicDemo is based on the XCode Master-Detail Application template. The only changes are in RMAppDelegate.
+The BasicDemo is based on the Xcode Master-Detail Application template. The only changes are in RMAppDelegate.
 
 ## Requirements
 
